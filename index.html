@@ -3,92 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BizDash — Business analytics dashboard with revenue charts, KPIs, and order tracking.">
-    <title>BizDash — Analytics</title>
+    <meta name="description" content="BizDash — Business analytics dashboard with revenue metrics and order tracking.">
+    <title>BizDash</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <div class="app">
-        <header class="header">
-            <div class="header-left">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                <h1>BizDash</h1>
-                <span class="header-badge">Live</span>
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+                <span>BizDash</span>
             </div>
-            <div class="header-right">
-                <select class="date-select" id="date-range">
-                    <option>Last 30 days</option>
-                    <option>Last 7 days</option>
-                    <option>Last 90 days</option>
-                    <option>This year</option>
-                </select>
-            </div>
-        </header>
-
-        <section class="kpi-grid">
-            <div class="kpi-card">
-                <div class="kpi-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg> Revenue</div>
-                <div class="kpi-value" id="kpi-revenue">--</div>
-                <div class="kpi-change" id="change-revenue"></div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg> Orders</div>
-                <div class="kpi-value" id="kpi-orders">--</div>
-                <div class="kpi-change" id="change-orders"></div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg> Customers</div>
-                <div class="kpi-value" id="kpi-customers">--</div>
-                <div class="kpi-change" id="change-customers"></div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Conversion</div>
-                <div class="kpi-value" id="kpi-conversion">--</div>
-                <div class="kpi-change" id="change-conversion"></div>
-            </div>
-        </section>
-
-        <section class="charts-row">
-            <div class="chart-card">
-                <div class="card-header">
-                    <span class="card-title">Revenue vs Expenses</span>
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <button class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Overview</button>
+                    <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Analytics</button>
+                    <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg> Orders</button>
+                    <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Customers</button>
                 </div>
-                <canvas class="chart-canvas" id="revenue-chart"></canvas>
-                <div class="chart-legend">
-                    <div class="legend-item"><span class="legend-dot" style="background:#6366f1"></span> Revenue</div>
-                    <div class="legend-item"><span class="legend-dot" style="background:#3f3f46"></span> Expenses</div>
+                <div class="nav-group">
+                    <div class="nav-group-label">Tools</div>
+                    <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Reports</button>
+                    <button class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg> Settings</button>
+                </div>
+            </nav>
+            <div class="sidebar-bottom">
+                <div class="user-dot">SH</div>
+                <span class="user-name">hazwan</span>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="topbar">
+                <span class="topbar-title">Overview</span>
+                <div class="topbar-actions">
+                    <select class="topbar-select" id="date-range">
+                        <option>Last 30 days</option>
+                        <option>Last 7 days</option>
+                        <option>Last 90 days</option>
+                        <option>This year</option>
+                    </select>
                 </div>
             </div>
-            <div class="chart-card">
-                <div class="card-header">
-                    <span class="card-title">Top Products</span>
-                </div>
-                <div id="products-list"></div>
-            </div>
-        </section>
 
-        <section class="table-card">
-            <div class="card-header">
-                <span class="card-title">Recent Orders</span>
+            <div class="dashboard">
+                <section class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Revenue</div>
+                        <div class="kpi-value" id="kpi-revenue">--</div>
+                        <div class="kpi-change" id="change-revenue"></div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Orders</div>
+                        <div class="kpi-value" id="kpi-orders">--</div>
+                        <div class="kpi-change" id="change-orders"></div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Customers</div>
+                        <div class="kpi-value" id="kpi-customers">--</div>
+                        <div class="kpi-change" id="change-customers"></div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Conversion</div>
+                        <div class="kpi-value" id="kpi-conversion">--</div>
+                        <div class="kpi-change" id="change-conversion"></div>
+                    </div>
+                </section>
+
+                <section class="panels">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <span class="panel-title">Revenue</span>
+                            <span class="panel-badge">Monthly</span>
+                        </div>
+                        <div class="panel-body">
+                            <canvas class="chart-canvas" id="revenue-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">
+                            <span class="panel-title">Top Products</span>
+                            <span class="panel-badge">By revenue</span>
+                        </div>
+                        <div class="panel-body" id="products-list"></div>
+                    </div>
+                </section>
+
+                <section class="table-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">Recent Orders</span>
+                    </div>
+                    <table>
+                        <thead><tr><th>Order</th><th>Customer</th><th>Product</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+                        <tbody id="orders-body"></tbody>
+                    </table>
+                </section>
             </div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Customer</th>
-                            <th>Product</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody id="orders-body"></tbody>
-                </table>
-            </div>
-        </section>
+        </main>
     </div>
-
     <script src="assets/js/app.js"></script>
 </body>
 </html>

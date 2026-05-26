@@ -50,7 +50,7 @@ async function loadRevenue() {
     const ctx = canvas.getContext('2d');
     const rect = canvas.parentElement.getBoundingClientRect();
     canvas.width = rect.width - 40;
-    canvas.height = 240;
+    canvas.height = 220;
 
     const pad = { top: 20, right: 12, bottom: 28, left: 50 };
     const w = canvas.width - pad.left - pad.right;
@@ -71,7 +71,7 @@ async function loadRevenue() {
         const y = pad.top + (h * i / 4);
         ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(canvas.width - pad.right, y); ctx.stroke();
         ctx.fillStyle = 'rgba(255,255,255,0.25)';
-        ctx.font = '10px Inter'; ctx.textAlign = 'right';
+        ctx.font = '10px system-ui'; ctx.textAlign = 'right';
         ctx.fillText('$' + Math.round((max - max * i / 4) / 1000) + 'k', pad.left - 8, y + 3);
     }
 
@@ -85,16 +85,16 @@ async function loadRevenue() {
         const expH = (d.expenses / max) * h;
 
         // Revenue bar
-        ctx.fillStyle = '#6366f1';
+        ctx.fillStyle = '#0070f3';
         roundRect(ctx, x - barWidth - gap/2, pad.top + h - revH, barWidth, revH, 3);
 
         // Expense bar
-        ctx.fillStyle = '#3f3f46';
+        ctx.fillStyle = '#262626';
         roundRect(ctx, x + gap/2, pad.top + h - expH, barWidth, expH, 3);
 
         // Label
         ctx.fillStyle = 'rgba(255,255,255,0.3)';
-        ctx.font = '10px Inter'; ctx.textAlign = 'center';
+        ctx.font = '10px system-ui'; ctx.textAlign = 'center';
         ctx.fillText(d.month, x, canvas.height - 6);
     });
 }
@@ -119,11 +119,11 @@ async function loadOrders() {
     const tbody = document.getElementById('orders-body');
     tbody.innerHTML = data.map(o => `
         <tr>
-            <td><span class="order-id">${o.id}</span></td>
+            <td><span class="cell-id">${o.id}</span></td>
             <td>${o.customer}</td>
             <td>${o.product}</td>
-            <td><span class="order-amount">$${o.amount.toFixed(2)}</span></td>
-            <td><span class="status-badge status-${o.status}">${o.status}</span></td>
+            <td><span class="cell-amount">$${o.amount.toFixed(2)}</span></td>
+            <td><span class="badge badge-${o.status}">${o.status}</span></td>
             <td>${formatDate(o.date)}</td>
         </tr>
     `).join('');
@@ -135,12 +135,16 @@ async function loadProducts() {
     if (!data) return;
 
     const list = document.getElementById('products-list');
-    list.innerHTML = data.map(p => `
-        <div class="product-item">
-            <span class="product-name">${p.name}</span>
-            <div class="product-stats">
-                <span class="product-sales">${p.sales} sales</span>
-                <span class="product-growth ${p.growth >= 0 ? 'up' : 'down'}">${p.growth >= 0 ? '+' : ''}${p.growth}%</span>
+    list.innerHTML = data.map((p, i) => `
+        <div class="product-row">
+            <div class="product-rank">${i + 1}</div>
+            <div class="product-info">
+                <div class="product-name">${p.name}</div>
+                <div class="product-meta">${p.sales} sales</div>
+            </div>
+            <div>
+                <div class="product-value">$${(p.revenue / 1000).toFixed(1)}k</div>
+                <div class="product-trend ${p.growth >= 0 ? 'up' : 'down'}">${p.growth >= 0 ? '+' : ''}${p.growth}%</div>
             </div>
         </div>
     `).join('');
